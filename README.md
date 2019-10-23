@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/martindobrev/madblog-springboot-api/tree/master.svg?style=svg)](https://circleci.com/gh/martindobrev/madblog-springboot-api/tree/master)
+
 # Madblog - a simple REST API for web and mobile clients  
 
 ### This project is a tutorial on building a web applications with Spring Boot
