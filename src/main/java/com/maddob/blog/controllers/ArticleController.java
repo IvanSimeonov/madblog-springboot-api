@@ -11,6 +11,8 @@ import com.maddob.blog.api.ArticleDTO;
 import com.maddob.blog.api.ArticlePageDTO;
 import com.maddob.blog.service.ArticleService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/v1/")
 public class ArticleController {
@@ -21,10 +23,16 @@ public class ArticleController {
 		this.articleService = articleService;
 	}
 	
+	@ApiOperation(value = "Gets last articles", notes = "Returns articles in pages. The default page consists of 5 elements.")
 	@GetMapping("/articles")
-	public ArticlePageDTO getArticlesByPage(@RequestParam(required = false) Long page) {
+	public ArticlePageDTO getArticlesByPage(@RequestParam(required = false) Long page, @RequestParam(required = false) Long pageSize) {
 		int pageNumber = (page == null || page < 0)? 0: page.intValue();
-		return this.articleService.getArticlePage(pageNumber);
+		
+		if (pageSize == null || pageSize < 0) {
+			return this.articleService.getArticlePage(pageNumber);
+		}
+		
+		return this.articleService.getArticlePage(pageNumber, pageSize.intValue());
 	}
 	
 	@GetMapping("/articles/{articleId}")

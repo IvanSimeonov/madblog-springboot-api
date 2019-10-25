@@ -29,13 +29,16 @@ public class ArticleControllerTest {
 	@Captor
 	ArgumentCaptor<Integer> pageNumberCaptor;
 	
+	@Captor
+	ArgumentCaptor<Integer> pageSizeCaptor;
+	
 	@Test
 	public void testControllerCallsPageZeroWhenNoParameterSet() {
 		// given
 		given(articleService.getArticlePage(pageNumberCaptor.capture())).willReturn(ArticlePageDTO.builder().build());
 		
 		// when
-		controllerUnderTest.getArticlesByPage(null);
+		controllerUnderTest.getArticlesByPage(null, null);
 		
 		// then
 		assertEquals(0, pageNumberCaptor.getValue());
@@ -47,7 +50,7 @@ public class ArticleControllerTest {
 		given(articleService.getArticlePage(pageNumberCaptor.capture())).willReturn(ArticlePageDTO.builder().build());
 		
 		// when
-		controllerUnderTest.getArticlesByPage(123l);
+		controllerUnderTest.getArticlesByPage(123l, null);
 		
 		// then
 		assertEquals(123, pageNumberCaptor.getValue());
@@ -59,11 +62,38 @@ public class ArticleControllerTest {
 		given(articleService.getArticlePage(pageNumberCaptor.capture())).willReturn(ArticlePageDTO.builder().build());
 		
 		// when
-		controllerUnderTest.getArticlesByPage(-123l);
+		controllerUnderTest.getArticlesByPage(-123l, null);
 		
 		// then
 		assertEquals(0, pageNumberCaptor.getValue());
 	}
+	
+	@Test
+	public void testControllerCallsPageAndSize() {
+		// given
+		given(articleService.getArticlePage(pageNumberCaptor.capture(), pageSizeCaptor.capture())).willReturn(ArticlePageDTO.builder().build());
+		
+		// when
+		controllerUnderTest.getArticlesByPage(2l, 4l);
+		
+		// then
+		assertEquals(2, pageNumberCaptor.getValue());
+		assertEquals(4, pageSizeCaptor.getValue());
+	}
+	
+	@Test
+	public void testControllerCallsPageAndInvalidSize() {
+		// given
+		given(articleService.getArticlePage(pageNumberCaptor.capture())).willReturn(ArticlePageDTO.builder().build());
+		
+		// when
+		controllerUnderTest.getArticlesByPage(2l, -4l);
+		
+		// then
+		assertEquals(2, pageNumberCaptor.getValue());
+	}
+	
+	
 	
 	@Test
 	public void testControllerReturnsDtoFromService() {

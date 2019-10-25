@@ -19,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Pageable;
 
 import com.maddob.blog.api.ArticleDTO;
 import com.maddob.blog.api.ArticlePageDTO;
@@ -41,6 +42,9 @@ public class ArticleServiceImplTest {
 	@Captor
 	ArgumentCaptor<Long> articleIdArgumentCaptor;
 	
+	@Captor
+	ArgumentCaptor<Pageable> pageableArticleArgumentCaptor;
+	
 	@InjectMocks
 	private ArticleServiceImpl serviceUnderTest;
 	
@@ -60,7 +64,7 @@ public class ArticleServiceImplTest {
 	@Test
 	public void testGetArticlePageReturnsCorrectObject() {
 		// given
-		given(articleRepository.findByPublishedTrue(any())).willReturn(
+		given(articleRepository.findByPublishedTrue(pageableArticleArgumentCaptor.capture())).willReturn(
 				new TestPage<Article>(1, 1l, 1, 1, 1, Collections.singletonList(ArticleConstants.DOMAIN))
 			);
 		
@@ -73,6 +77,25 @@ public class ArticleServiceImplTest {
 		assertEquals(1, articlePage.getTotalArticles());
 		assertEquals(1, articlePage.getTotalPages());
 		assertEquals(ArticleConstants.DTO, articlePage.getArticles().get(0));
+		assertNotNull(pageableArticleArgumentCaptor.getValue());
+		assertEquals(0, pageableArticleArgumentCaptor.getValue().getPageNumber());
+		assertEquals(ArticleServiceImpl.DEFAULT_ARTICLE_PAGE_SIZE, pageableArticleArgumentCaptor.getValue().getPageSize());
+	}
+	
+	@Test
+	public void testGetArticlePageCalledWithCorrectParameter() {
+		// given
+		given(articleRepository.findByPublishedTrue(pageableArticleArgumentCaptor.capture())).willReturn(
+				new TestPage<Article>(1, 1l, 1, 1, 1, Collections.singletonList(ArticleConstants.DOMAIN))
+			);
+		
+		// when
+		serviceUnderTest.getArticlePage(2, 100);
+		
+		// then
+		assertNotNull(pageableArticleArgumentCaptor.getValue());
+		assertEquals(2, pageableArticleArgumentCaptor.getValue().getPageNumber());
+		assertEquals(100, pageableArticleArgumentCaptor.getValue().getPageSize());
 	}
 	
 	@Test
@@ -101,4 +124,5 @@ public class ArticleServiceImplTest {
 		assertNull(dto);
 		verify(articleRepository, times(0)).findById(articleIdArgumentCaptor.capture());
 	}
+	
 }

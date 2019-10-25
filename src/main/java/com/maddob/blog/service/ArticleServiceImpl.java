@@ -1,5 +1,7 @@
 package com.maddob.blog.service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.maddob.blog.api.ArticleDTO;
@@ -18,6 +20,8 @@ import com.maddob.blog.repositories.ArticleRepository;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 	
+	public final static int DEFAULT_ARTICLE_PAGE_SIZE = 5;
+	
 	private final ArticleRepository articleRepository;
 	private final ArticleMapper articleMapper;
 	
@@ -27,8 +31,14 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	public ArticlePageDTO getArticlePage(int pageNumber, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize); 
+		return articleMapper.domainPage2dto(articleRepository.findByPublishedTrue(pageable));
+	}
+	
+	@Override
 	public ArticlePageDTO getArticlePage(int pageNumber) {
-		return articleMapper.domainPage2dto(articleRepository.findByPublishedTrue(null));
+		return this.getArticlePage(pageNumber, DEFAULT_ARTICLE_PAGE_SIZE);
 	}
 
 	@Override
@@ -39,5 +49,7 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		return articleMapper.domain2dto(articleRepository.findById(id).get());
 	}
+
+	
 
 }
