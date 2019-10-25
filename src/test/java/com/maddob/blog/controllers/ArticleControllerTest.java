@@ -1,6 +1,7 @@
 package com.maddob.blog.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.maddob.blog.api.ArticleDTO;
 import com.maddob.blog.api.ArticlePageDTO;
+import com.maddob.blog.mappers.ArticleConstants;
 import com.maddob.blog.service.ArticleService;
 
 @ExtendWith(MockitoExtension.class)
@@ -60,5 +63,17 @@ public class ArticleControllerTest {
 		
 		// then
 		assertEquals(0, pageNumberCaptor.getValue());
+	}
+	
+	@Test
+	public void testControllerReturnsDtoFromService() {
+		// given
+		given(articleService.getArticle(any())).willReturn(ArticleConstants.DTO);
+		
+		// when
+		ArticleDTO dto = controllerUnderTest.getArticleById(123l);
+		
+		// then
+		assertEquals(dto, ArticleConstants.DTO);
 	}
 }
