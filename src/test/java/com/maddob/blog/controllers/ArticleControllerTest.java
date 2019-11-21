@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.maddob.blog.api.ArticleDTO;
 import com.maddob.blog.api.ArticlePageDTO;
-import com.maddob.blog.mappers.ArticleConstants;
+import com.maddob.blog.helpers.ArticleConstants;
 import com.maddob.blog.service.ArticleService;
 
 @ExtendWith(MockitoExtension.class)

@@ -23,8 +23,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Generates Swagger definitions for the Madblog API!
  * 
  * The definitions will be used to create frontend and mobile clients...
- * Probably someday different servers. This will a very good basis for
- * comparing different frameworks and languages based on various parameters
+ * Probably someday different server implementations. This will provide a good basis for
+ * comparing different frameworks 
  * 
  * @author Martin Dobrev <martin@dobrev.eu.com>
  */
@@ -57,9 +57,9 @@ public class SpringFoxConfig {
 		);
 	}
 
-	private final static String description = "This is a simple webpage and blog API."
+	private final static String description = "This is a simple webpage and blog API. "
 			+ "It is a part of the madblog development tutorial. "
-			+ "The tutorial series will show how to build .... "
+			+ "The tutorial series will show how to build and test a simple website with an integrated blog. "
 			+ "TODO: Add details as the tutorial is being built"
 			+ "For more information checkout https://maddob.com/tutorial";
 	

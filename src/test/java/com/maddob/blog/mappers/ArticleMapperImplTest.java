@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import com.maddob.blog.api.ArticleDTO;
 import com.maddob.blog.api.ArticlePageDTO;
 import com.maddob.blog.domain.Article;
+import com.maddob.blog.helpers.ArticleConstants;
 import com.maddob.blog.helpers.TestPage;
 
 public class ArticleMapperImplTest {

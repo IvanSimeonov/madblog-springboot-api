@@ -1,4 +1,4 @@
-package com.maddob.blog.mappers;
+package com.maddob.blog.helpers;
 
 import java.time.LocalDateTime;
 

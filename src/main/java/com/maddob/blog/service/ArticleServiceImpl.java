@@ -49,7 +49,4 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		return articleMapper.domain2dto(articleRepository.findById(id).get());
 	}
-
-	
-
 }

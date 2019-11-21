@@ -1,6 +1,5 @@
 package com.maddob.blog.controllers;
 
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +34,7 @@ public class ArticleController {
 		return this.articleService.getArticlePage(pageNumber, pageSize.intValue());
 	}
 	
+	@ApiOperation(value = "Retrieves a single article by its id")
 	@GetMapping("/articles/{articleId}")
 	public ArticleDTO getArticleById(@PathVariable Long articleId) {
 		return this.articleService.getArticle(articleId);
