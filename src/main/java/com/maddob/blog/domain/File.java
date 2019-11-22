@@ -11,9 +11,22 @@ import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * File entity
+ * 
+ * Files will be stored in the database. This entity will
+ * be responsible for saving both the metadata and the actual bytes 
+ * of each file.
+ * 
+ * @author Martin Dobrev <martin@dobrev.eu.com>
+ *
+ */
 @Entity
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +43,6 @@ public class File {
   private byte[] data;
 
   private long size;
-  private String fileType;
+  private String type;
   private LocalDateTime created;
 }

@@ -22,7 +22,7 @@ public class ArticleController {
 		this.articleService = articleService;
 	}
 	
-	@ApiOperation(value = "Gets last articles", notes = "Returns articles in pages. The default page consists of 5 elements.")
+	@ApiOperation(value = "Gets article page", notes = "Returns articles in pages. The default page consists of 5 elements.")
 	@GetMapping("/articles")
 	public ArticlePageDTO getArticlesByPage(@RequestParam(required = false) Long page, @RequestParam(required = false) Long pageSize) {
 		int pageNumber = (page == null || page < 0)? 0: page.intValue();
