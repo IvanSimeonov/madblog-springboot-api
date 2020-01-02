@@ -17,6 +17,7 @@ public class ArticleDTO {
 	private String title;
 	private String subtitle;
 	private String content;
+	private Long coverImage;
 	private boolean published;
 	private boolean featured;
 	private LocalDateTime created;

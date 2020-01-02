@@ -44,6 +44,8 @@ public class Article {
 	@NotNull
 	private String content;
 	
+	private Long coverImage;
+	
 	private boolean published;
 	private boolean featured;
 	private LocalDateTime created;

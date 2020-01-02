@@ -25,6 +25,7 @@ public class ArticleMapperImpl implements ArticleMapper {
 				.created(article.getCreated())
 				.featured(article.isFeatured())
 				.published(article.isPublished())
+				.coverImage(article.getCoverImage())
 				.subtitle(article.getSubtitle())
 				.title(article.getTitle())
 				.build();
@@ -41,6 +42,7 @@ public class ArticleMapperImpl implements ArticleMapper {
 				.content(articleDto.getContent())
 				.title(articleDto.getTitle())
 				.subtitle(articleDto.getSubtitle())
+				.coverImage(articleDto.getCoverImage())
 				.featured(articleDto.isFeatured())
 				.published(articleDto.isPublished())
 				.created(articleDto.getCreated())

@@ -1,6 +1,7 @@
 package com.maddob.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.maddob.blog.domain.File;
 import com.maddob.blog.repositories.FileRepository;
@@ -15,6 +16,7 @@ import com.maddob.blog.repositories.FileRepository;
  * @author Martin Dobrev <martin@dobrev.eu.com>
  *
  */
+@Service
 public class DBFileService implements FileService {
 
 	private final FileRepository fileRepository;

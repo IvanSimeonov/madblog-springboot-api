@@ -35,7 +35,4 @@ public class FileController {
 		httpHeaders.add("Content-Type", file.getType());
 		return new ResponseEntity<>(file.getData(), httpHeaders, HttpStatus.OK);
 	}
-	
-	
-	
 }

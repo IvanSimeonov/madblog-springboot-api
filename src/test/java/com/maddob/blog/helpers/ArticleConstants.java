@@ -11,12 +11,14 @@ public class ArticleConstants {
 	public final static String SUBTITLE = "TEST SUBTITLE";
 	public final static LocalDateTime DATE_TIME = LocalDateTime.of(2019, 1, 1, 10, 0);
 	public final static Long ID = 57485438L;
+	public final static Long COVER_IMAGE_ID = 1L;
 	
 	public final static Article DOMAIN = Article.builder()
 			.content(CONTENT)
 			.created(DATE_TIME)
 			.id(ID)
 			.published(false)
+			.coverImage(COVER_IMAGE_ID)
 			.featured(true)
 			.subtitle(SUBTITLE)
 			.title(TITLE)
@@ -28,6 +30,7 @@ public class ArticleConstants {
 			.id(ID)
 			.published(false)
 			.featured(true)
+			.coverImage(COVER_IMAGE_ID)
 			.subtitle(SUBTITLE)
 			.title(TITLE)
 			.build();
