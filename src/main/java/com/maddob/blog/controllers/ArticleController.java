@@ -1,10 +1,6 @@
 package com.maddob.blog.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.maddob.blog.api.ArticleDTO;
 import com.maddob.blog.api.ArticlePageDTO;
@@ -40,4 +36,9 @@ public class ArticleController {
 		return this.articleService.getArticle(articleId);
 	}
 
+
+	@PostMapping("/articles")
+	public ArticleDTO createArticle(@RequestBody ArticleDTO article) {
+		return this.articleService.createArticle(article);
+	}
 }

@@ -49,4 +49,9 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		return articleMapper.domain2dto(articleRepository.findById(id).get());
 	}
+
+	@Override
+	public ArticleDTO createArticle(ArticleDTO article) {
+		return articleMapper.domain2dto(articleRepository.save(articleMapper.dto2domain(article)));
+	}
 }
