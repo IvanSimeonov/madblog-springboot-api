@@ -6,8 +6,10 @@ import com.maddob.blog.api.ArticleDTO;
 import com.maddob.blog.api.ArticlePageDTO;
 import com.maddob.blog.service.ArticleService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@Api(description = "Article Controller", tags = {"article"})
 @RestController
 @RequestMapping("/api/v1/")
 public class ArticleController {
@@ -30,7 +32,7 @@ public class ArticleController {
 		return this.articleService.getArticlePage(pageNumber, pageSize.intValue());
 	}
 	
-	@ApiOperation(value = "Retrieves a single article by its id")
+	@ApiOperation(value = "Retrieves a single article by its id", nickname = "getArticleById")
 	@GetMapping("/articles/{articleId}")
 	public ArticleDTO getArticleById(@PathVariable Long articleId) {
 		return this.articleService.getArticle(articleId);

@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.maddob.blog</groupId>
 	<artifactId>madblog</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<name>madblog</name>
 	<description>A simple webpage and blog REST API</description>
 
@@ -79,7 +79,7 @@
 			</activation>
 			<build>
 				<plugins>
-					<!-- START: SWAGGER MAVEN PLUGIN -->
+<!-- START: SWAGGER MAVEN PLUGIN -->
 					<plugin>
 						<groupId>com.github.kongchen</groupId>
 						<artifactId>swagger-maven-plugin</artifactId>
@@ -110,7 +110,6 @@
 								</apiSource>
 							</apiSources>
 						</configuration>
-
 						<executions>
 							<execution>
 								<phase>prepare-package</phase>
@@ -120,8 +119,7 @@
 							</execution>
 						</executions>
 					</plugin>
-
-					<!-- START: SWAGGER CODEGEN MAVEN PLUGIN -->
+<!-- START: SWAGGER CODEGEN MAVEN PLUGIN -->
 					<plugin>
 						<groupId>io.swagger.codegen.v3</groupId>
 						<artifactId>swagger-codegen-maven-plugin</artifactId>
@@ -213,5 +211,4 @@
 			</build>
 		</profile>
 	</profiles>
-
 </project>
