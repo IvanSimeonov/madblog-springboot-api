@@ -36,9 +36,15 @@ public class ArticleController {
 		return this.articleService.getArticle(articleId);
 	}
 
-
 	@PostMapping("/articles")
 	public ArticleDTO createArticle(@RequestBody ArticleDTO article) {
 		return this.articleService.createArticle(article);
 	}
+
+	@DeleteMapping("/article/table/{articleId}")
+	public void deleteArticleById(@PathVariable Long articleId) {
+		articleService.deleteArticle(articleId);
+	}
+
+
 }

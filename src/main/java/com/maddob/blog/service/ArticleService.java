@@ -8,4 +8,5 @@ public interface ArticleService {
 	ArticlePageDTO getArticlePage(int pageNumber, int pageSize);
 	ArticleDTO getArticle(Long id);
     ArticleDTO createArticle(ArticleDTO article);
+	void deleteArticle(Long id);
 }
