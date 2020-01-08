@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.maddob.blog</groupId>
 	<artifactId>madblog</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.8-SNAPSHOT</version>
 	<name>madblog</name>
 	<description>A simple webpage and blog REST API</description>
 
@@ -71,21 +71,146 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>build-info</id>
-						<goals>
-							<goal>build-info</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	<profiles>
+		<profile>
+			<id>swagger</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+<!-- START: SWAGGER MAVEN PLUGIN -->
+					<plugin>
+						<groupId>com.github.kongchen</groupId>
+						<artifactId>swagger-maven-plugin</artifactId>
+						<version>3.1.8</version>
+						<configuration>
+							<apiSources>
+								<apiSource>
+									<springmvc>true</springmvc>
+									<info>
+										<title>${project.name}</title>
+										<version>${project.version}</version>
+										<description>${project.description}</description>
+									</info>
+									<schemes>
+										<scheme>http</scheme>
+									</schemes>
+									<host>localhost:8080</host>
+									<locations>
+										<location>com.maddob.blog.controllers.*</location>
+									</locations>
+									<outputPath>${project.build.directory}/swagger</outputPath>
+									<swaggerDirectory>${project.build.directory}/swagger
+									</swaggerDirectory>
+									<swaggerFileName>${project.artifactId}</swaggerFileName>
+									<outputFormats>json,yaml</outputFormats>
+									<attachSwaggerArtifact>true</attachSwaggerArtifact>
+									<!-- <jsonExampleValues>true</jsonExampleValues> -->
+								</apiSource>
+							</apiSources>
+						</configuration>
+						
+						<executions>
+							<execution>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+		
+<!-- START: SWAGGER CODEGEN MAVEN PLUGIN -->
+					<plugin>
+						<groupId>io.swagger.codegen.v3</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<version>3.0.13</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<inputSpec>${project.build.directory}/swagger/madblog.yaml</inputSpec>
+									<output>${project.build.directory}/generated-sources/typescript-api</output>
+									<language>typescript-angular</language>
+									<configOptions>
+										<npmName>@maddob/madblog-api-test</npmName>
+										<ngVersion>8.2.4</ngVersion>
+										<npmVersion>${project.version}</npmVersion>
+									</configOptions>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+<!-- END: SWAGGER CODEGEN MAVEN PLUGIN -->
 
+<!-- START: FRONTEND MAVEN PLUGIN -->
+					<plugin>
+						<groupId>com.github.eirslett</groupId>
+						<artifactId>frontend-maven-plugin</artifactId>
+						<version>1.9.1</version>
+						<executions>
+<!-- START EXECUTION: INSTALL NODE AND NPM -->
+							<execution>
+								<!-- optional: you don't really need execution ids, but it looks 
+									nice in your build log. -->
+								<id>install node and npm</id>
+								<goals>
+									<goal>install-node-and-npm</goal>
+								</goals>
+								<!-- optional: default phase is "generate-resources" -->
+								<phase>package</phase>
+							</execution>
+<!-- END EXECUTION: INSTALL NODE AND NPM -->
+
+<!-- START EXECUTION: NPM INSTALL -->				
+							<execution>
+						    <id>npm install</id>
+						    <phase>package</phase>
+						    <goals>
+						        <goal>npm</goal>
+						    </goals>
+							</execution>
+<!-- END EXECUTION: NPM INSTALL -->
+
+<!-- START EXECUTION: NPM RUN BUILD  -->	
+							<execution>
+						    <id>npm rub build</id>
+						    <phase>package</phase>
+						    <goals>
+						        <goal>npm</goal>
+						    </goals>
+						    <configuration>
+						        <arguments>run build</arguments>
+						    </configuration>
+							</execution>
+<!-- END EXECUTION: NPM RUN BUILD  -->
+
+<!-- START EXECUTION: NPM PUBLISH  -->
+							<execution>
+						    <id>npm publish dist</id>
+						    <phase>deploy</phase>
+						    <goals>
+						        <goal>npm</goal>
+						    </goals>
+						    <configuration>
+						        <arguments>publish dist --access public</arguments>
+						    </configuration>
+							</execution>
+<!-- END EXECUTION: NPM PUBLISH  -->
+					
+						</executions>
+						<configuration>
+							<nodeVersion>v12.14.1</nodeVersion>
+        			<workingDirectory>${project.build.directory}/generated-sources/typescript-api</workingDirectory>
+						</configuration>
+					</plugin>
+<!-- END: FRONTEND MAVEN PLUGIN -->
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.maddob.blog.domain.File;
 import com.maddob.blog.service.FileService;
 
+import io.swagger.annotations.Api;
+
+@Api(description = "File Controller", tags = {"file"})
 @RestController
 @RequestMapping("/api/v1/")
 public class FileController {
