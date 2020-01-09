@@ -9,5 +9,5 @@ public interface ArticleService {
 	ArticleDTO getArticle(Long id);
     ArticleDTO createArticle(ArticleDTO article);
 	void deleteArticle(Long id);
-//	ArticleDTO editArticle(ArticleDTO article, Long articleId);
+	ArticleDTO editArticle(ArticleDTO article, Long articleId);
 }

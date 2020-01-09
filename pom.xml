@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.maddob.blog</groupId>
 	<artifactId>madblog</artifactId>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.7-SNAPSHOT</version>
 	<name>madblog</name>
 	<description>A simple webpage and blog REST API</description>
 

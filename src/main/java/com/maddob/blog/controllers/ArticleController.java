@@ -50,10 +50,10 @@ public class ArticleController {
 		articleService.deleteArticle(articleId);
 	}
 
-//	@PutMapping("article/edit/{articleId}")
-//	public ArticleDTO editArticle(@RequestBody ArticleDTO article, @PathVariable Long articleId){
-//		return this.articleService.editArticle(article, articleId);
-//	}
+	@PutMapping(value = "article/edit/{articleId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ArticleDTO editArticle(@RequestBody ArticleDTO article, @PathVariable Long articleId){
+		return this.articleService.editArticle(article, articleId);
+	}
 
 
 }
