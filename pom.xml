@@ -11,12 +11,13 @@
 	</parent>
 	<groupId>com.maddob.blog</groupId>
 	<artifactId>madblog</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.5-SNAPSHOT</version>
 	<name>madblog</name>
 	<description>A simple webpage and blog REST API</description>
 
 	<properties>
 		<java.version>11</java.version>
+		<spring-boot.version>2.2.2.RELEASE</spring-boot.version>
 		<swagger.version>2.9.2</swagger.version>
 	</properties>
 
@@ -70,6 +71,24 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<executions>
+					<execution>
+						<id>build-info</id>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 	<profiles>
 		<profile>
@@ -207,6 +226,8 @@
 						</configuration>
 					</plugin>
 					<!-- END: FRONTEND MAVEN PLUGIN -->
+
+
 				</plugins>
 			</build>
 		</profile>

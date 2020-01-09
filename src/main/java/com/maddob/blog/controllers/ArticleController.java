@@ -1,5 +1,6 @@
 package com.maddob.blog.controllers;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import com.maddob.blog.api.ArticleDTO;
@@ -32,13 +33,14 @@ public class ArticleController {
 		return this.articleService.getArticlePage(pageNumber, pageSize.intValue());
 	}
 	
-	@ApiOperation(value = "Retrieves a single article by its id", nickname = "getArticleById")
+	@ApiOperation(value = "Retrieves a single article by its id", nickname = "getArticleById", produces = MediaType.APPLICATION_JSON_VALUE)
 	@GetMapping("/articles/{articleId}")
 	public ArticleDTO getArticleById(@PathVariable Long articleId) {
 		return this.articleService.getArticle(articleId);
 	}
 
-	@PostMapping("/articles")
+
+	@PostMapping(value = "/articles", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ArticleDTO createArticle(@RequestBody ArticleDTO article) {
 		return this.articleService.createArticle(article);
 	}
@@ -47,6 +49,11 @@ public class ArticleController {
 	public void deleteArticleById(@PathVariable Long articleId) {
 		articleService.deleteArticle(articleId);
 	}
+
+//	@PutMapping("article/edit/{articleId}")
+//	public ArticleDTO editArticle(@RequestBody ArticleDTO article, @PathVariable Long articleId){
+//		return this.articleService.editArticle(article, articleId);
+//	}
 
 
 }

@@ -65,14 +65,13 @@ public class ArticleServiceImpl implements ArticleService {
         }
     }
 
-    public ArticleDTO editArticleById(Long id) {
-        Article articleDomain = articleMapper.dto2domain(getArticle(id));
-        if (articleDomain == null) {
-            return null;
-        }
-
-
-        return articleMapper.domain2dto(articleDomain);
-
-    }
+//    @Override
+//    public ArticleDTO editArticle(ArticleDTO article, Long articleId) {
+//        if (getArticle(articleId) == null) {
+//            return null;
+//        }
+//        Article save = articleRepository.save(articleMapper.dto2domain(article));
+//        return articleMapper.domain2dto(save);
+//
+//    }
 }
